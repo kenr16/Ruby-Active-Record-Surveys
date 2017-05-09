@@ -20,9 +20,12 @@
 
 <form action="/survey/<%= @survey.id %>" method="post">
   <input id="question_id" name="question_id" type="hidden" value="<%= @counter %>">
+
   <label><%= @question.content %></label>
   <input type="text" name="questions_answer" placeholder="Write answer here">
   <button type="submit">Submit survey</button>
 </form>
 
 <% end %>
+
+<%= @variable%>

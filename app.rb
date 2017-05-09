@@ -23,7 +23,7 @@ end
 get('/survey/:id') do
   @counter = 0
   @survey = Survey.find(params['id'])
-  @questions = @survey.questions
+  @questions = @survey.questions.sort {|a, b| a.id <=> b.id }
   @question = @questions[@counter]
   erb(:survey)
 end
@@ -35,31 +35,27 @@ post('/survey/:id/add_question') do
   redirect("/survey/#{survey.id}")
 end
 
+# Survey loop
 post('/survey/:id') do
   @counter = params['question_id'].to_i
-  @counter += 1
   @survey = Survey.find(params['id'])
-  @questions = @survey.questions
-  answers = []
-  if @counter == (@questions.length)
-    answers.each do |key, value|
-      key.update({:answer => value})
-      binding.pry
-    end
-    redirect("survey/#{@survey.id}/result")
-  else
-    @question = @questions[@counter]
-    answer = params["questions_answer"]
-    answers.push({@question => answer})
-  end
+  @questions = @survey.questions.sort {|a, b| a.id <=> b.id }
+  @question = @questions[@counter]
+  answer = params["questions_answer"]
+  @question.update({:answers => answer})
 
+  @counter += 1
+  if @counter == (@questions.length)
+    redirect("survey/#{@survey.id}/result")
+  end
+  @question = @questions[@counter]
   erb(:survey)
 end
 
 #results
 get('/survey/:id/result') do
   @survey = Survey.find(params['id'])
-  @questions = @survey.questions
+  @questions = @survey.questions.sort {|a, b| a.id <=> b.id }
   erb(:result)
 end
 
