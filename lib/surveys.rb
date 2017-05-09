@@ -1,8 +1,9 @@
 class Survey < ActiveRecord::Base
-  has_many(:questions)
+  has_many(:questions, dependent: :destroy)
   validates(:name, {:presence => true, :length => { :maximum => 200 }})
   before_save(:downcase_name)
   before_save(:capitalize)
+  # before_destroy(:delete_questions)
 
 private
 
@@ -17,4 +18,11 @@ private
     end
     self.name=(words.join(" "))
   end
+
+  # define_method(:delete_questions) do
+  #   answers.each do |answer|
+  #     answer.destroy
+  #   end
+  # end
+  
 end

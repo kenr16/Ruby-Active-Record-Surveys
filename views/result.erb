@@ -3,4 +3,7 @@
 <% @questions.each do |question| %>
   <h4>Question: <em><%= question.content %></em><h4>
   <h5>Answer: <em><%= question.answers%></em></h5>
+  <h5><%= question.percentage("1") %>% percent of users answered "1"</h5>
+  <h5><%= question.percentage("2") %>% percent of users answered "2"</h5>
+  <h5><%= question.percentage("3") %>% percent of users answered "3"</h5>
 <% end %>
