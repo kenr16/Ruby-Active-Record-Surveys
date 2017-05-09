@@ -1,16 +1,28 @@
 <h3><%= @survey.name %></h3>
 
-<form action="/survey/<%= @survey.id %>/responses" method="post">
-  <% @questions.each do |question| %>
-    <label><%= question.content %></label>
-    <input type="text" name="<%= question.id %>" placeholder="Write answer here">
-    <br>
-  <% end %>
-  <button type="submit">Submit survey</button>
-</form>
 
 <hr>
+
 <form action="/survey/<%= @survey.id %>/add_question" method="post">
   <input type="text" name="question" placeholder="Add a question">
   <button type="submit">Add question</button>
 </form>
+
+<hr>
+
+<a class="btn btn-success" href='/survey/<%= @survey.id%>/update'>Modify This Survey</a>
+
+<br>
+<hr>
+<br>
+
+<% if @questions.any?() %>
+
+<form action="/survey/<%= @survey.id %>" method="post">
+  <input id="question_id" name="question_id" type="hidden" value="<%= @counter %>">
+  <label><%= @question.content %></label>
+  <input type="text" name="questions_answer" placeholder="Write answer here">
+  <button type="submit">Submit survey</button>
+</form>
+
+<% end %>
