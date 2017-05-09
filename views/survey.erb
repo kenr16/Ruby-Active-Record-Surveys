@@ -1,0 +1,16 @@
+<h3><%= @survey.name %></h3>
+
+<form action="/survey/<%= @survey.id %>/responses" method="post">
+  <% @questions.each do |question| %>
+    <label><%= question.content %></label>
+    <input type="text" name="<%= question.id %>" placeholder="Write answer here">
+    <br>
+  <% end %>
+  <button type="submit">Submit survey</button>
+</form>
+
+<hr>
+<form action="/survey/<%= @survey.id %>/add_question" method="post">
+  <input type="text" name="question" placeholder="Add a question">
+  <button type="submit">Add question</button>
+</form>

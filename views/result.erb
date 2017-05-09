@@ -1,0 +1,6 @@
+<h3>Results for: <%= @survey.name %></h3>
+
+<% @questions.each do |question| %>
+  <h4>Question: <em><%= question.content %></em><h4>
+  <h5>Answer: <em><%= question.answers%></em></h5>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>To Do</h1>
+
+<p>Here are all your Surveys:</p>
+
+<ul>
+  <% @surveys.each do |survey| %>
+    <li><a href="/survey/<%= survey.id() %>"><%= survey.name() %></a></li>
+  <% end %>
+</ul>
+
+<p>Create new survey:</p>
+
+<form action="/add_survey" method="post">
+  <div class="form-group">
+    <label class="form-label" for="survey_name">Assign a name to your survey:</label>
+    <input class="form-control" id='survey_name' type="text" name="survey_name" placeholder="Survey Name" autofocus>
+    <button type="submit" class="button btn">Add Survey</button>
+  </div>
+</form>
